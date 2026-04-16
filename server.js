@@ -6,6 +6,10 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 
+// Import routes
+import authroutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+
 const app = express();
 
 //middleware
@@ -17,6 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.json({message: 'AI Recipe Generator API'});
 });
+
+// API routes
+app.use('/api/auth', authroutes);
+app.use('/api/users', userRoutes);
+
 
 const PORT = process.env.PORT || 8000;
 
