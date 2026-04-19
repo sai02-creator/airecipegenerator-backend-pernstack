@@ -133,4 +133,3 @@ class PantryItem {
 }
 
 export default PantryItem;
-
