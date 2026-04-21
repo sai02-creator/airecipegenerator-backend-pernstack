@@ -37,7 +37,7 @@ Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon Pos
   Secure login & signup using JSON Web Tokens for stateless authentication.
 
 - 🤖 **AI Recipe Generation (Gemini API)**
-  Generate recipes dynamically based on user ingredients.
+  Generates recipes dynamically based on user-provided ingredients.
 
 - 🥫 **Pantry Management APIs (PostgreSQL + REST)**
   Full CRUD operations for managing pantry items.
@@ -76,9 +76,9 @@ Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon Pos
 
 ### 🤖 Recipes
 
-- POST `/api/recipes/generate`
-- POST `/api/recipes`
-- GET `/api/recipes`
+- POST `/api/recipes/generate` → Generate recipe using AI
+- POST `/api/recipes` → Save recipe to database
+- GET `/api/recipes` → Fetch saved recipes
 
 ### 🥫 Pantry
 
@@ -99,36 +99,19 @@ Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon Pos
 
 ---
 
+## 🔄 API Flow Example
+
+1. User sends ingredients → `POST /api/recipes/generate`
+2. Backend generates recipe using Gemini AI
+3. User saves recipe → `POST /api/recipes`
+4. Recipe stored in Neon PostgreSQL
+5. User retrieves recipes → `GET /api/recipes`
+
+---
+
 ## 📬 API Testing (Thunder Client)
 
 API endpoints were tested using **Thunder Client (VS Code Extension)**.
-
-### Example: Create Recipe
-
-**POST** `/api/recipes`
-
-```json
-{
-  "name": "Simple Tomato Pasta",
-  "description": "Quick and delicious pasta made with fresh tomatoes and garlic",
-  "cuisine_type": "Italian",
-  "difficulty": "easy",
-  "metadata": {
-    "prep_time": 10,
-    "cook_time": 20,
-    "total_time": 30,
-    "servings": 2
-  },
-  "ingredients": [
-    {
-      "name": "Pasta",
-      "quantity": 200,
-      "unit": "grams",
-      "category": "Grains"
-    }
-  ]
-}
-```
 
 ### Example: Generate Recipe (AI)
 
@@ -137,6 +120,17 @@ API endpoints were tested using **Thunder Client (VS Code Extension)**.
 ```json
 {
   "ingredients": ["rice", "chicken", "spices"]
+}
+```
+
+### Example Response
+
+```json
+{
+  "name": "Spiced Chicken Rice",
+  "description": "A flavourful rice dish cooked with chicken and aromatic spices.",
+  "ingredients": [...],
+  "instructions": [...]
 }
 ```
 
