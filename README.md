@@ -34,8 +34,18 @@ Neon PostgreSQL
 
 ### 🐳 Docker Deployment Architecture
 
-## ![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
+````text
+User (Browser)
+     ↓
+Frontend (React - AWS S3)
+     ↓
+HTTP Request
+     ↓
+Docker Container (AWS EC2)
+     ↓
+Node.js + Express API
+     ↓
+Neon PostgreSQL Database
 ## 🛠 Tech Stack
 
 - ⚙️ Backend: Node.js, Express.js
@@ -108,7 +118,7 @@ Example:
 {
   "ingredients": ["rice", "chicken", "spices"]
 }
-```
+````
 
 ---
 
