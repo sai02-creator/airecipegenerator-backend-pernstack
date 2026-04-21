@@ -19,7 +19,7 @@
 The **AI Recipe Generator Backend** is a production-ready REST API built with Node.js and Express.
 It powers a full-stack application that enables users to generate recipes using AI, manage pantry items, plan meals, and maintain shopping lists.
 
-The backend integrates with **Neon PostgreSQL** for persistent storage and supports secure authentication using JWT.
+The backend integrates with **Neon PostgreSQL** for persistent storage and uses JWT for secure authentication.
 
 ---
 
@@ -29,41 +29,47 @@ The backend integrates with **Neon PostgreSQL** for persistent storage and suppo
 Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon PostgreSQL
 ```
 
+### 🐳 Docker Deployment Architecture
+
+![Docker Architecture](./screenshots/docker-architecture.png)
+
+> Diagram shows containerised Node.js API running on EC2, connected to Neon PostgreSQL and accessed by S3-hosted frontend.
+
 ---
 
 ## 🚀 Features
 
 - 🔐 **Authentication & Authorization (JWT-Based)**
-  Secure login & signup using JSON Web Tokens for stateless authentication.
+  Secure login & signup using JSON Web Tokens.
 
 - 🤖 **AI Recipe Generation (Gemini API)**
-  Generates recipes dynamically based on user-provided ingredients.
+  Generate recipes dynamically based on user ingredients.
 
 - 🥫 **Pantry Management APIs (PostgreSQL + REST)**
-  Full CRUD operations for managing pantry items.
+  Full CRUD operations for pantry items.
 
-- 📅 **Meal Planning System (Relational Data)**
-  Organise and manage meals with structured backend logic.
+- 📅 **Meal Planning System**
+  Manage structured meal plans with relational data.
 
-- 🛒 **Shopping List Management (Derived Data)**
-  Automatically generate shopping lists based on pantry and meal plans.
+- 🛒 **Shopping List Management**
+  Generate shopping lists based on pantry and meals.
 
 - ⚡ **Scalable REST API Architecture**
   Modular structure with routes, controllers, and middleware.
 
-- 🐳 **Containerised Deployment (Docker)**
-  Ensures consistent environments across development and production.
+- 🐳 **Dockerised Deployment**
+  Backend runs inside a container for consistent environments.
 
 ---
 
 ## 🛠 Tech Stack
 
-- ⚙️ **Backend:** Node.js, Express.js
-- 🗄️ **Database:** PostgreSQL (Neon)
-- 🔐 **Authentication:** JWT
-- ☁️ **Cloud:** AWS EC2
-- 🐳 **DevOps:** Docker
-- 🤖 **AI Integration:** Gemini API
+- ⚙️ Backend: Node.js, Express.js
+- 🗄️ Database: PostgreSQL (Neon)
+- 🔐 Auth: JWT
+- ☁️ Cloud: AWS EC2
+- 🐳 DevOps: Docker
+- 🤖 AI: Gemini API
 
 ---
 
@@ -77,8 +83,8 @@ Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon Pos
 ### 🤖 Recipes
 
 - POST `/api/recipes/generate` → Generate recipe using AI
-- POST `/api/recipes` → Save recipe to database
-- GET `/api/recipes` → Fetch saved recipes
+- POST `/api/recipes` → Save recipe
+- GET `/api/recipes` → Fetch recipes
 
 ### 🥫 Pantry
 
@@ -101,19 +107,19 @@ Frontend (React, S3) → REST API (Node.js, Express, Docker on EC2) → Neon Pos
 
 ## 🔄 API Flow Example
 
-1. User sends ingredients → `POST /api/recipes/generate`
-2. Backend generates recipe using Gemini AI
-3. User saves recipe → `POST /api/recipes`
-4. Recipe stored in Neon PostgreSQL
-5. User retrieves recipes → `GET /api/recipes`
+1. User sends ingredients → `/api/recipes/generate`
+2. Backend generates recipe using AI
+3. User saves recipe → `/api/recipes`
+4. Data stored in Neon PostgreSQL
+5. User retrieves recipes → `/api/recipes`
 
 ---
 
 ## 📬 API Testing (Thunder Client)
 
-API endpoints were tested using **Thunder Client (VS Code Extension)**.
+API endpoints tested using Thunder Client (VS Code extension).
 
-### Example: Generate Recipe (AI)
+### Example: Generate Recipe
 
 **POST** `/api/recipes/generate`
 
@@ -128,7 +134,7 @@ API endpoints were tested using **Thunder Client (VS Code Extension)**.
 ```json
 {
   "name": "Spiced Chicken Rice",
-  "description": "A flavourful rice dish cooked with chicken and aromatic spices.",
+  "description": "A flavourful dish made with rice and aromatic spices",
   "ingredients": [...],
   "instructions": [...]
 }
@@ -145,8 +151,6 @@ http://3.25.50.50:8000
 ---
 
 ## ⚙️ Environment Variables
-
-Create a `.env` file:
 
 ```env
 DATABASE_URL=your_neon_postgresql_connection_string
@@ -168,13 +172,13 @@ npm start
 
 ## 🐳 Docker Setup
 
-### 🔨 Build Image
+### Build Image
 
 ```bash
 docker build -t ai-recipe-backend .
 ```
 
-### ▶️ Run Container
+### Run Container
 
 ```bash
 docker run -d -p 8000:8000 \
@@ -189,20 +193,19 @@ ai-recipe-backend
 
 ## ☁️ Deployment
 
-- 🚀 Backend hosted on AWS EC2
-- 🐳 Containerised using Docker
-- 🗄 Database hosted on Neon PostgreSQL
-- 🔗 Integrated with S3-hosted frontend
+- Backend hosted on AWS EC2
+- Docker container for deployment
+- Neon PostgreSQL for database
+- Connected to S3-hosted frontend
 
 ---
 
 ## 🔮 Future Improvements
 
-- 🔒 Add rate limiting & API security enhancements
-- 🌍 Use API Gateway / CloudFront
-- 🔁 Implement CI/CD (GitHub Actions)
-- 📊 Add logging & monitoring
-- 🧠 Improve AI prompt optimisation
+- Add rate limiting & API security
+- Implement CI/CD pipeline
+- Add logging & monitoring
+- Improve AI prompt optimisation
 
 ---
 
